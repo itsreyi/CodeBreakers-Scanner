@@ -1,0 +1,4 @@
+Host : 185.135.158.144 (mc.charlieroleplay.it)
+
+Port : 25565	State : open	Protocol : tcp
+
