@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeBreakers Scanner</title>
 </head>
 
 <body>
@@ -61,7 +60,7 @@
 
   <h2>Photo</h2>
 <div>
-    <img src="./CB_scanner.png" alt="Tool Screen">
+    <img src="CB_scanner.PNG" alt="Tool Screen">
 </div>
 
 </html>
