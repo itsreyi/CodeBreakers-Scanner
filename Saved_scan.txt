@@ -1,5 +1,0 @@
-----------------CodeBreakers Scanner----------------
-Host : 127.0.0.1 ()
-
-[CB Scanner] No open ports found for this host.
-----------------------------------------------------
