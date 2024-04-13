@@ -1,6 +1,7 @@
 import nmap
 import socket
 import re
+from mcstatus import JavaServer
 from colorama import Fore, init
 
 init()
@@ -34,8 +35,6 @@ def save_to_file(output):
             file.write(strip_color(output))
         print(Fore.GREEN + '[+] Output saved successfully.' + Fore.RESET)
         print('')
-
-
 
 print(Fore.RED + r"   _____          _        ____                 _                 ")
 print(r"  / ____|        | |      |  _ \               | |                ")
@@ -86,20 +85,29 @@ elif scan_type == 3:
 
 found_open_ports = False
 output = ""
-
 for host in nm.all_hosts():
-    output += Fore.LIGHTRED_EX +'----------------'+ Fore.RED +'CodeBreakers Scanner'+ Fore.LIGHTRED_EX +'----------------'+ Fore.RESET + "\n"
-    output += f'Host : {host} ({nm[host].hostname()})\n\n'
+    found_open_ports = False
+    temp_output = ""
+    temp_output += Fore.LIGHTRED_EX +'----------------'+ Fore.RED +'CodeBreakers Scanner'+ Fore.LIGHTRED_EX +'---------- ------'+ Fore.RESET + "\n"
+    temp_output += f'Host : {host} ({nm[host].hostname()})\n\n'
     for proto in nm[host].all_protocols():
         lport = nm[host][proto].keys()
         for port in lport:
             if nm[host][proto][port]['state'] == 'open':
-                output += Fore.RED + f'Port : ' + Fore.RESET + f'{port}\t' + Fore.RED +'State : '+ Fore.RESET + f'{nm[host][proto][port]["state"]}\t'+ Fore.RED +'Protocol : '+ Fore.RESET + f'{proto}\n'
+                temp_output += Fore.RED + f'Port : ' + Fore.RESET + f'{port}\t' + Fore.RED +'State : '+ Fore.RESET + f'{nm[host][proto][ port]["state"]}\t'+ Fore.RED +'Protocol : '+ Fore.RESET + f'{proto}\n'
+                
+                server = JavaServer.lookup(host, port)
+                status = server.status()
+                temp_output += Fore.RED + 'Server : '+ Fore.RESET +f'{host}:{port}\n'
+                temp_output += Fore.RED + 'Version : ' + Fore.RESET + f'{status.version.name}\n'
+                temp_output += Fore.RED + 'Players : ' + Fore.RESET + f'{status.players.online}/{status.players.max}\n'
+                temp_output += '\n'
                 found_open_ports = True
-    if not found_open_ports:
-        output += Fore.LIGHTBLACK_EX + '[' + Fore.RED + 'CB' + Fore.LIGHTRED_EX +' Scanner' + Fore.LIGHTBLACK_EX + '] ' +  Fore.LIGHTRED_EX + 'No open ports found for this host.\n'
-    output += Fore.LIGHTRED_EX +'----------------------------------------------------'+ Fore.RESET + "\n"
-
+    if found_open_ports:
+        output += temp_output
+    else:
+        output += Fore.LIGHTBLACK_EX + '[' + Fore.RED + 'CB' + Fore.LIGHTRED_EX +' Scanner' + Fore.LIGHTBLACK_EX + '] ' + Fore.LIGHTRED_EX + 'No open ports found for host: ' + host + '\n '
+    output += Fore.LIGHTRED_EX +'------------------------------------------ ----------'+ Fore.RESET + "\n"
 print(output)
 save_to_file(output)
 print(Fore.LIGHTBLACK_EX + '[' + Fore.RED + 'CB' + Fore.LIGHTRED_EX +' Scanner' + Fore.LIGHTBLACK_EX + '] ' +  Fore.LIGHTGREEN_EX + 'Scan completed')
