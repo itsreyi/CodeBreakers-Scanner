@@ -58,9 +58,9 @@
         <li><strong>reyi</strong> - <a href="https://github.com/itsreyi">Your GitHub Profile</a></li>
     </ul>
 
-  <h2>Photo</h2>
+  <h2>Discord</h2>
 <div>
-    <img src="CB_scanner.PNG" alt="Tool Screen">
+    <iframe src="https://discord.com/widget?id=1116336596590014524&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
 </div>
 
 </html>
