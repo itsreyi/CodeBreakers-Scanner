@@ -60,7 +60,7 @@
 
   <h2>Discord</h2>
 <div>
-    <iframe src="https://discord.com/widget?id=1116336596590014524&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+    <p>https://discord.gg/8PtwWXnT5w</p>
 </div>
 
 </html>
